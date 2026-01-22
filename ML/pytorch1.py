@@ -60,4 +60,5 @@ print(f"\nTrained model: y = {w.item():.2f}x + {b.item():.2f}")
 print("Losses trend:", losses[-5:])  # Last 5 losses
 
 
-#w-parameter(line) feature selection stocastic gradient descent; w- created out of slopes;w is a slope;b-parameter interms of line moves vertically 
+#w-parameter(line) feature selection stocastic gradient descent; w- created out of slopes;w is a slope;
+# b-parameter interms of line moves vertically  
