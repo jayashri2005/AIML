@@ -24,3 +24,22 @@ for i in range(100):
     loss.backward()
     sgd.step()
     print(loss.item())
+
+lossfn1=nn.MSELoss()
+sgd=Adam(mod1.parameters(),lr=0.01)
+for i in range(100):
+    sgd.zero_grad()
+    y_pred=mod1(xx)
+    loss=lossfn1(y_pred,yy)
+    loss.backward()
+    sgd.step()
+    print(loss.item())
+y=mod1(xx).detach().numpy()
+print(y)
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+plt.scatter(xx,yy)
+plt.plot(xx,y)
+plt.savefig('plot10.png')
+print(torch.FloatTensor([8.6]))
