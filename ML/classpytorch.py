@@ -37,7 +37,7 @@ for i in range(100):
 y=mod1(xx).detach().numpy()
 print(y)
 import matplotlib
-matplotlib.use('Agg')  # Use non-interactive backend
+matplotlib.use('Agg')  
 import matplotlib.pyplot as plt
 plt.scatter(xx,yy)
 plt.plot(xx,y)
