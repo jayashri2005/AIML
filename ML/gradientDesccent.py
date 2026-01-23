@@ -135,7 +135,7 @@ b=b+gradient(on the parabola the line that tpuch the curve)
 
 w = 0.0
 b = 0.0
-lr = 0.1  # learning rate
+lr = 0.1  # learning rate -> trail method [hit & try/manually ]
 
 plt.scatter(x, y)
 for i in range(60):

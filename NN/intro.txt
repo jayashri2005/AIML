@@ -1,0 +1,105 @@
+"Neuron" -> combination of linear combination[must] nd activation function[optional]
+collect minute data nd store in 1st layer of neuron  and combine it to form next layer 
+
+"overfitting" -> more number of neurons ; model become more accurate ND generalize data less 
+
+"generalization" -> model become more accurate ; means understanding of data is more ;reduce error in data 
+
+"linear re"->single straigh line sep cluster : "nn" -> multiple line sep cluster , boundary should be more accurate 
+
+"how to find generalized model" -> test on new data (based on old pattern) that doesn't have y val ; then using x we get p(y);
+i.e 100 data old -> 75 new 25 unused data then compare the val with old y val 
+old vaichu train pani model ready panitu new val test panalam nd for cmp we use old p(y) val
+
+old data -> train data; new data -> test data; new data is used to examine model performance 
+now train error nd test error are compared ;
+train error closet to zero ; reduce to zero
+testing error remains big ;
+
+train nd test error are compared ;nd accuary is equal nd val is equal;
+"100 percent accurate model" -> like we simply memorize the data without understanding;
+
+"decision tree" - > build 100 percent accurate model ; 
+but here test nd train error val  mismatch;
+
+
+
+"neuron" -> multi neuraon -> gather accurate data -> become more accurate -> cause overfitting -> so we go for multiple layer of neurons
+"linear combination" -> used for approximating linear function [ it connect multi neuron to nxt layer and form a line finally add all to 1 neuron ]
+"layer" ->1st[minute details]->2nd layer[diffuse ist] -> 3rd layer[generalized data] ->finally[approximate data] 
+
+>>>> 1 neuron - 1 line -> multi neuron -> multi line make a curve like boundary -> layer increase 
+layer increase -> curve become more accurate and it smoothen the curve-> finally 1 neuron -> curve -> line
+
+"ravel() function"-> used to smoothen or flatten the curve 
+
+"how 1 neuron to other differ"-> bcoz of initialize weight in the starting
+
+"ReLu"-> Some neurons use ReLU (passes positive values, blocks negative), produce angle in the line 
+
+
+"regression"-> get continuous output [ boundary data]
+"classification"->get classification b/w 2 or more classes [ boundary data]
+
+
+
+"last layer"-> layer of softmax function -> it contain num of neuran equal to num of classes 
+"softmax layer"-> similar to sigmoid->both generate probostic val
+"2 categories"->softmax-2 neuron,sigmoid 1 neuron,regression-1 neuron
+
+"
+
+
+
+
+
+
+"neural network" nd "Neuron" - >
+
+I'll explain neural networks and how neurons differ from each other in a simple, clear way. Let me first check what's in your current files
+
+Based on your notes and current understanding, I'll explain neural networks and how neurons differ from each other in a simple, clear way.
+
+## Neural Networks: Simple Explanation
+
+### What is a Neuron?
+A single neuron is like a basic decision-maker:
+- **Input**: Receives data from previous layer
+- **Processing**: Does a linear combination (weights × inputs + bias)
+- **Output**: Applies activation function to decide what to pass forward
+
+### How Neurons Differ from Each Other
+
+**1. Different Weights and Biases**
+- Each neuron has its own unique weights and bias values
+- This makes each neuron "specialize" in detecting different patterns
+- Example: In image recognition, one neuron might detect edges, another might detect corners
+
+**2. Different Activation Functions**
+- Some neurons use ReLU (passes positive values, blocks negative)
+- Others use Sigmoid (squashes values between 0 and 1)
+- This affects how they respond to input patterns
+
+**3. Different Positions in Network**
+- **Input layer neurons**: Just pass raw data forward
+- **Hidden layer neurons**: Extract features and patterns
+- **Output layer neurons**: Make final predictions
+
+### How They Work Together
+
+**Single Neuron**: Creates one straight line decision boundary
+**Multiple Neurons**: Each creates different lines, combined they form curves
+**Multiple Layers**: 
+- Layer 1: Detects simple patterns (edges, basic features)
+- Layer 2: Combines simple patterns into complex ones
+- Layer 3: Creates even more abstract representations
+
+### Simple Example
+Imagine recognizing a cat:
+- **Neuron 1**: Detects pointy ears
+- **Neuron 2**: Detects whiskers  
+- **Neuron 3**: Detects furry texture
+- **Next layer**: Combines these to recognize "cat face"
+- **Output layer**: Final decision: "cat" or "not cat"
+
+Each neuron is different because they learn to detect different features, and their differences make the network powerful!
