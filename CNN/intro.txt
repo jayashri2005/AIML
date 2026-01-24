@@ -57,4 +57,21 @@ pooling -> types mx,avg
 
  https://developer.nvidia.com/discover/convolution
 
- 
+
+AlexNet (2012):
+
+8 layers: 5 Conv + 3 FC
+Revolutionized ImageNet classification
+Used ReLU, Dropout, Data augmentation
+Architecture: Conv(11) → Pool → Conv(5) → Pool → Conv(3)×3 → FC×2 → Output
+VGG16 (2014):
+
+16 layers: 13 Conv + 3 FC
+All 3×3 convolutions, uniform structure
+Very deep but simple: Conv(3)×2 → Pool → Conv(3)×2 → Pool → Conv(3)×3 → Pool → FC×3
+More parameters than AlexNet
+Key differences:
+
+AlexNet: Larger kernels (11×11, 5×5), fewer layers
+VGG16: Smaller kernels (3×3), much deeper, more uniform
+

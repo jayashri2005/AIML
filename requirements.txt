@@ -36,3 +36,6 @@ chromadb
 pydub
 librosa
 fastmcp
+
+torch
+torchvision

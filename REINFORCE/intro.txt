@@ -1,2 +1,37 @@
 "reinforcement learning" -> means learning from rewards and punishments
 i.e robots,deepseek
+AlexNet (2012):
+
+8 layers: 5 Conv + 3 FC
+Revolutionized ImageNet classification
+Used ReLU, Dropout, Data augmentation
+Architecture: Conv(11) → Pool → Conv(5) → Pool → Conv(3)×3 → FC×2 → Output
+VGG16 (2014):
+
+16 layers: 13 Conv + 3 FC
+All 3×3 convolutions, uniform structure
+Very deep but simple: Conv(3)×2 → Pool → Conv(3)×2 → Pool → Conv(3)×3 → Pool → FC×3
+More parameters than AlexNet
+Key differences:
+
+AlexNet: Larger kernels (11×11, 5×5), fewer layers
+VGG16: Smaller kernels (3×3), much deeper, more uniform
+
+"transfer learning" -> means using a pre-trained model and fine-tuning it for a specific task
+"concept"
+Take a model trained on large dataset (like AlexNet,VGG16)
+Reuse learned features (edges, textures, patterns)
+Fine-tune for your specific task with less data
+
+"how wrk"
+Take a model trained on large dataset (like ImageNet)
+Reuse learned features (edges, textures, patterns)
+Fine-tune for your specific task with less data
+
+"Transfer Learning Process:"
+
+Load Pre-trained Model - ResNet, VGG16 trained on ImageNet
+Freeze Early Layers - Keep learned features (edges, textures)
+Replace Final Layer - Change output classes (e.g., 1000 → 10)
+Fine-tune - Train only new layers on your data
+Unfreeze & Train - Optionally train entire model with low learning rate
