@@ -45,11 +45,17 @@ print(img.shape)
 # Convert to grayscale and resize to 8x8 to match training data
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 print(gray.shape)
+cv2.imwrite('gray_img.png', gray)
 rs = cv2.resize(gray, (8, 8))
 print(rs.shape)
 far = rs.flatten()
-fimg = torch.tensor(far,dtype=torch.float32)
+fimg = torch.tensor(far,dtype=torch.float32).unsqueeze(0)
 yp = model(fimg)
 print(yp)
 fx=torch.softmax(model(fimg),dim=1)
 print(torch.argmax(fx,dim=1))
+
+
+
+
+

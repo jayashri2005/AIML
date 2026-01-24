@@ -1,0 +1,10 @@
+Table: employees
+Columns:
+- name (VARCHAR)
+- job_title (VARCHAR)
+- company (VARCHAR)
+- email (VARCHAR)
+- phone (VARCHAR)
+- city (VARCHAR)
+- salary (BIGINT)
+- hired_date (VARCHAR)

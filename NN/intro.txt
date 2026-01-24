@@ -45,6 +45,7 @@ layer increase -> curve become more accurate and it smoothen the curve-> finally
 
 "last layer"-> layer of softmax function -> it contain num of neuran equal to num of classes 
 "softmax layer"-> similar to sigmoid->both generate probostic val
+"argmax"-> used to get the index of the maximum value in the array 
 "2 categories"->softmax-2 neuron,sigmoid 1 neuron,regression-1 neuron
 
 "

@@ -1,0 +1,2 @@
+"reinforcement learning" -> means learning from rewards and punishments
+i.e robots,deepseek
