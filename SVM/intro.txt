@@ -57,8 +57,10 @@ hyperparameterr => "SVClassifier(kernal='linear',c=1.0)"
     1.linear svm -> like separating apples and oranges with a straight knife cut
     2.polynomial svm -> used when -> degree = features+1
                     -> like separating fruits by curved cut (banana shape vs round apple)
-    3.rbf svm -> radial basis function ; it is based on similarity ; uses
+    3.rbf svm -> radial basis function ; it is based on similarity ; uses standard deviation[gamma val] ; 
+                ->high similarity - less std deviation
                 -> like grouping similar foods by taste (sweet vs sour) - creates circular boundaries 
+
 
 ## SVM Use Cases:
 
@@ -86,3 +88,11 @@ hyperparameterr => "SVClassifier(kernal='linear',c=1.0)"
 - Financial fraud detection
 - When data has overlapping classes
 - Most popular kernel for general use 
+
+
+"to find best parameter"->use gridsearch cv 
+"cross validation"-> means splitting data into multiple parts (folds),
+ training on some parts and testing on others, then averaging results to get reliable performance estimate
+
+ "for eaxmple div data into 4 parts and train on 3 parts and test on 1 part and repeat this process 4 times" cv=4 
+ "special kind" -> statified scheme -> under statified kfold
