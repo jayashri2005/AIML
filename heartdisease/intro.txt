@@ -1,0 +1,2 @@
+dataset -> decision tree -> train nd spilt -> r2_score ->streamlit 
+predict heart disease is there or not

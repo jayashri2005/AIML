@@ -54,6 +54,35 @@ hyperparameterr => "SVClassifier(kernal='linear',c=1.0)"
                        1 point touching - "support vector"
 
 "svm type":
-    1.linear svm
-    2.polynomial svm
-    3.rbf svm -> radial basis function ; it is based on similarity 
+    1.linear svm -> like separating apples and oranges with a straight knife cut
+    2.polynomial svm -> used when -> degree = features+1
+                    -> like separating fruits by curved cut (banana shape vs round apple)
+    3.rbf svm -> radial basis function ; it is based on similarity ; uses
+                -> like grouping similar foods by taste (sweet vs sour) - creates circular boundaries 
+
+## SVM Use Cases:
+
+### Linear SVM:
+**Definition**: Finds straight line/plane to separate data
+**Use Cases**: 
+- Text classification (spam vs not spam)
+- Simple binary classification problems
+- When data is linearly separable
+- High-dimensional data with many features
+
+### Polynomial SVM:
+**Definition**: Uses polynomial functions to create curved decision boundaries
+**Use Cases**:
+- Image recognition (curved shapes)
+- Non-linear patterns in data
+- When relationship between features is polynomial
+- Complex boundary problems
+
+### RBF SVM:
+**Definition**: Uses radial basis function for similarity-based circular boundaries
+**Use Cases**:
+- Complex non-linear classification
+- Medical diagnosis (disease prediction)
+- Financial fraud detection
+- When data has overlapping classes
+- Most popular kernel for general use 
