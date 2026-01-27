@@ -1,0 +1,79 @@
+"decisiontree" -> means prediction of output based on input
+"decision tree vs random forest" -> random forest is better than decision tree because it takes multiple decision trees and by 
+taking average of all the decision trees it gives better result
+
+"train-test split" -> split the data into train and test set for training and testing the model
+
+"decision tree"-> A non-linear model that splits data into regions using simple rules. 
+Unlike linear regression which assumes a straight-line relationship, 
+decision trees can capture complex non-linear patterns and interactions without needing feature engineering.
+They're better than polynomial regression when you don't know the polynomial degree in advance or when
+relationships are piecewise rather than smooth curves.better for cloud based data,use r2 score,mean absolute percentage error
+>> try to get best tree based on score by using test-train split 
+two types -> grow-split (pre-pruning: limit depth before full growth) vs post-pruning (grow full tree then trim based on validation score)
+
+"linear regression"-> best when data is growing linearly
+"polynomial regression"-> best when data is growing non-linearly[like patchs or curves]
+"decision tree"-> best when data is growing non-linearly[like patchs or curves] 
+    but it can capture complex non-linear patterns and interactions without needing feature engineering.
+
+    uses -> "mean line" -> used to cut at which point it will be best to cut llry like a regression line 
+
+    error cal = summation of (error in left + error in right)
+    "e"=(y-y^r)^2
+    "1st split" -> min(summation of (error in left + error in right))
+    "split"-> staircase like a obj that never end ; it also be like a linear line but it is not gud 
+    lots of hit nd try takes place in hyper parameters to get a better structure
+
+-> unlike regression it doesnt have an coeeficient to deal it with seperate alg under 
+"sklearn -> model.important_features"
+
+-> it tends to show 100% accuracy(train) but not in test 60% accuracy(test)  "major flaw"
+-> to avoid this we use -> pruning -> two types:
+    Pre-pruning: Stop growth early (max_depth, min_samples) - prevents overfitting [by setting max split=2,3,4]
+    Post-pruning: Grow full tree, then trim branches based on validation score
+    it resuce 100 -> 90\80 or something it also affect the test data    
+
+
+   ccp_alpha val used to trim tree ; ccp_alpha val are under sklearn -> cost_complexity_pruning_path
+
+-> it reduces accuracy; test data follow train data with larger variation ; if test is small it doesnt follow 
+
+-> convert decision tree to random forest -> because it is better than decision tree
+-> or use "boosting" -> builds trees sequentially, each correcting errors of previous one. 
+Better than random forest for complex patterns but more sensitive to overfitting. 
+Examples: AdaBoost, GradientBoosting, XGBoost.
+
+>> cut data randomly by taking any number of rows -> then compare all of them -> nd discard 10% of columns [fixed]-> selection of col randomly
+all of these is used to get yp = "random forest"
+
+"basic boosting" -> decide to cut of num of rows depends upon wrng nd right classifier;
+"wrng classifier" -> if it x=cat then it also predict x as rat
+"right classifier" -> if it x=cat then it also predict x as cat
+
+when wrng classifier is increase right classifier is decrease
+in this case some of right classifier get sacrificed to crt wrng = "AdaBoost"
+
+
+AdaBoost" -> Adaptive Boosting: gives more weight to misclassified samples in each iteration.
+ Weak learners focus on hard examples. Final prediction = weighted vote of all trees.
+  Reduces both bias and variance.
+
+"AdaBoost" -> oru chef first try cook biryani, if taste wrong, next time focus on mistakes. 
+First chef: salt less, second chef: add more salt, third chef: fix spice. 
+Each chef learns from previous mistakes. Final dish = combination of all chefs' best parts. 
+Like cooking committee - each member fixes previous errors.
+
+Random Forest: many chefs cook separately, average all dishes
+AdaBoost: chefs cook one by one, each fixing previous mistakes
+
+Decision Tree: oru teacher asks questions to classify students
+"Score > 80?" → YES → "Attendance > 90%?" → YES → Grade A
+"Score > 80?" → NO → "Score > 60?" → YES → Grade B
+"Score > 80?" → NO → "Score > 60?" → NO → Grade C
+
+Like flowchart - each question splits data into smaller groups
+Final answer = leaf node (no more questions) [only answer]
+Simple to understand, but can memorize too much (overfitting)
+
+ 

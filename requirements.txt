@@ -39,3 +39,7 @@ fastmcp
 
 torch
 torchvision
+scikit-learn
+matplotlib
+numpy
+mglearn
