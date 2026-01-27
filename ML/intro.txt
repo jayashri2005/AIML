@@ -76,4 +76,50 @@ Like flowchart - each question splits data into smaller groups
 Final answer = leaf node (no more questions) [only answer]
 Simple to understand, but can memorize too much (overfitting)
 
- 
+adaboosting -> "formula" 
+    alpha=ln(1-err/err) #ln is used to produce +ve/-ve val
+    err^t=summation(weight * L(y,y^i))
+    w^(t+1)=w^t*exp(-alpha*L) #exp = +ve double w ; -ve decrease w
+
+if prediction wrong, increase that row's weight to appear more often in next training
+like np.random.uniform() - some rows get selected multiple times (doubled/tripled)
+wrong predictions get more attention in next iteration
+
+
+"classification" -> split nodes to achieve lowest impurity (pure groups)
+MATH formulas:
+1. Entropy = -Σ(p*log₂p) - measures uncertainty (0 = pure, 1 = mixed)
+2. Gini = 1-Σ(p²) - measures impurity (0 = pure, 0.5 = mixed)
+measures impurity = ΣpNlog₂pN
+Lower values = better splits (more pure groups)
+
+Entropy -> 1 when highly mixed; 0 when pure (all same class)
+
+split after split moves towards purity 
+(more splits) = more purity 
+
+Example: [R N R R] 
+→ First split: [[R N][R R]] (impurity: [1, 0]) 
+→ Second split: [[R][N][R][R]] (impurity: [0, 1, 0, 0]) = pure groups!
+
+"Splitting criteria" -> choose split that maximizes information gain (reduces impurity most)
+for example:
+Dataset: [Age>30?, Income>50k?] → choose question that gives purest groups
+If "Age>30?" gives [A,A,B,B] (mixed) and "Income>50k?" gives [A,A,A,B] (purer)
+→ Choose "Income>50k?" split (higher information gain)
+
+    Information Gain = Original impurity - Weighted average impurity after split
+    gain = (entropy of parent - entropy of child) [entropy of table - entropy of column(a)]
+
+    Simple analogy: Like choosing the best question to separate apples from oranges - 
+    "Is it red?" might work better than "Is it round?" depending on your fruit basket!
+
+dataset - find - supernode(root node)->find prob of each class -> if entropy 0 leave else repeat the steps to achieve exntropy  0
+split only happens when there is a mixup of prob (i.e y no y)
+
+"entropy of table" -> entropy of entire dataset before any splits (parent node)
+"entropy of column" -> entropy after splitting on specific feature (child nodes) 
+                    proportion * entropy of row1[y y y {entropy = 0}] + proportion * entropy of row2[y y n n{entropy = 1}] +...
+                    proportion = no of rows/total num of rows in a table 
+"gain"-> (entropy of table - entropy of column)
+

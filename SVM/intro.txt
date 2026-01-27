@@ -1,0 +1,59 @@
+"support vector machine" -> means "finding the best boundary line"
+suppose if there is two compound boundary lime in parallel then we need to find best fit line -> that is the mid line of both lines
+distance between two is counted as a error if long distance large loss ; small -> less optimize
+only optimize with the help of increasing the margins 
+
+it is criteria for "logestic reg "
+y*yp >0
+to maintain summation(y*yp)=> 
+
+
+for "svm "
+    
+    y*yp>=1 [non loss case]
+
+    if the particle cross the xompound boundry not a main boundary then it will be count as loss 
+    both side dist +1 +1 
+    margin =2 
+    whenever it cross compound boundary then it is considered as loss even if it dosen't cross the compound boundary then there is no loss 
+
+
+    max[0,1-y*yp] => when y*yp return -1 then the max is 0 [i.e max[0,0.2] => 0.2 >0 so it is considered as loss ]
+    
+Example calculations:
+Let y = true label (+1 or -1), yp = predicted value
+
+Case 1: Correct classification with good margin
+y = +1, yp = +2
+y*yp = 1*2 = 2
+loss = max[0,1-2] = max[0,-1] = 0 ✓ (no loss)
+
+Case 2: Correct classification but within margin
+y = +1, yp = +0.5  
+y*yp = 1*0.5 = 0.5
+loss = max[0,1-0.5] = max[0,0.5] = 0.5 (loss - too close to boundary)
+
+Case 3: Misclassification
+y = +1, yp = -0.5
+y*yp = 1*(-0.5) = -0.5
+loss = max[0,1-(-0.5)] = max[0,1.5] = 1.5 (high loss)
+
+Case 4: Correct classification with negative label
+y = -1, yp = -1.5
+y*yp = (-1)*(-1.5) = 1.5
+loss = max[0,1-1.5] = max[0,-0.5] = 0 ✓ (no loss)
+    
+"C" -. sklearn base parameter ; small 'c' -> wider margin 
+    C is the sklearn base parameter
+    Small C → wider margin (more regularization, allows more misclassifications)
+     Large C → narrower margin (less regularization, penalizes misclassifications heavily)
+
+hyperparameterr => "SVClassifier(kernal='linear',c=1.0)"
+
+"compound boundary" -> atleast touch 1 point either touch all points ;
+                       1 point touching - "support vector"
+
+"svm type":
+    1.linear svm
+    2.polynomial svm
+    3.rbf svm -> radial basis function ; it is based on similarity 
