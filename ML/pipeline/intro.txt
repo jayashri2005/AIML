@@ -1,0 +1,183 @@
+"model making:" 
+
+        "data cleaning"
+        "data rearrangement"
+                |                       --splitting--
+        "feature standardization"
+        (or) feature scaling
+        "feature selection"
+                |                       --validation--
+        "dimensionality reduction"
+        "modelling advanced"
+                |
+            "deployment"
+
+"Data cleaning" - > taking mean,median,mode to fill missing values or use interpolation
+"histogram"-> checking for outliers and removing them
+np.rANDOM,NORMARL(MEAN,STD),
+
+"outliers" - data points that differ significantly from other observations
+Types:
+1. Global outliers - far from all data points
+2. Contextual outliers - unusual in specific context
+3. Collective outliers - group of unusual data points
+
+"biased data" - data that is not representative of the population
+"data transformation with numbers" -> converting categorical data to numerical using techniques like label encoding, 
+                                       one-hot encoding, or ordinal encoding 
+
+by converting kernal to numeric format -> [r,g,y,g,r]=[0,1,2,0,1] -> it get biased here so we use normalization to deal with this 
+
+## Simple Explanation:
+**Problem**: Label encoding creates artificial order
+- Colors: red=0, green=1, yellow=2
+- Model thinks: yellow > green > red (wrong!)
+
+**Solution**: 
+- **One-hot encoding**: red=[1,0,0], green=[0,1,0], yellow=[0,0,1]
+- **Normalization**: Scales all features to same range
+- **Result**: No artificial bias between categories 
+
+## How Normalization Works:
+**Min-Max Scaling** (0 to 1):
+- Formula: (value - min) / (max - min)
+- Example: [0,1,2] → [(0-0)/(2-0), (1-0)/(2-0), (2-0)/(2-0)] = [0, 0.5, 1]
+
+**Z-score Standardization**:
+- Formula: (value - mean) / std_dev
+- Result: mean=0, std=1
+- Prevents any feature from dominating due to scale 
+
+## Ordinal Data Bias:
+**Example**: Grades [m,h,p,g,n] = [3,1,4,2,0]
+- Model thinks: p(4) > m(3) > g(2) > h(1) > n(0)
+- **Problem**: Artificial order and distances
+- **Reality**: Just categories, not measurements
+
+**Solution**: One-hot encoding treats all categories equally
+#when size of data remains same then it can shrink data ; to make model stable;if not then remove bias,skewnwss 
+#skewness means asymmetry in data distribution - when data is not normally distributed (left or right tail longer)
+#skewness -0.5 to +0.5 acceptable
+
+"two types of normalization:" 
+1. Min-Max Scaling -> means scaling data to fixed range [0,1]
+2. Z-score Standardization -> means scaling data to mean=0, std=1
+
+3. Robust Scaling -> uses median and IQR, resistant to outliers
+   Formula: (x - median) / IQR
+   Benefits: Not affected by extreme values
+   Use when: Data has many outliers
+
+standard deviation formula  
+  x - μ / σ
+
+This is the z-score formula (standardization)
+x = individual value
+μ = mean (mu)
+σ = standard deviation (sigma)
+Standard deviation formula would be:
+
+Population: σ = √(Σ(x - μ)² / N)
+Sample: s = √(Σ(x - x̄)² / (n-1))
+
+"MULTICOLLINEARITY" -> MEANS two or more features are highly correlated
+Two ways to avoid:
+1. Remove one of the correlated features
+2. Use regularization (Ridge/Lasso) or PCA to combine features
+
+by using cond (condition number):
+- cond(X) measures matrix sensitivity
+- cond < 10: Good (no multicollinearity)
+- cond 10-30: Moderate (some multicollinearity)
+- cond > 30: Bad (high multicollinearity - fix needed)
+
+OUTLIERS:
+- Data points that differ significantly from other observations
+- Can be errors OR real extreme values
+- Affect model performance and statistics
+
+HOW TO DETECT OUTLIERS:
+1. Z-score method: |z| > 3 (3 standard deviations)
+2. IQR method: Q1 - 1.5*IQR or Q3 + 1.5*IQR
+
+HOW IQR METHOD WORKS:
+- Q1 = 25th percentile (first quartile)
+- Q3 = 75th percentile (third quartile)
+- IQR = Q3 - Q1 (interquartile range)
+- Lower bound = Q1 - 1.5*IQR
+- Upper bound = Q3 + 1.5*IQR
+- Values outside bounds = outliers
+
+WHY 1.5*IQR:
+- Based on normal distribution properties
+- In normal data, ~99.3% of values fall within ±1.5*IQR
+- Values beyond this are statistically unusual
+- 1.5 is standard threshold (can be adjusted to 3 for extreme outliers)
+
+EXAMPLE:
+Data: [1,2,3,4,5,6,7,8,9,10,100]
+Q1 = 3.25, Q3 = 8.75, IQR = 5.5
+Lower bound = 3.25 - 1.5*5.5 = -5.0
+Upper bound = 8.75 + 1.5*5.5 = 17.0
+100 is outlier (above 17.0)
+3. Visual: Box plots, scatter plots
+
+HOW TO HANDLE OUTLIERS:
+1. Remove them (if errors)
+2. Cap them (winsorization)
+3. Transform them (log, sqrt)
+4. Keep them (if meaningful)
+
+EXAMPLE:
+- Titanic Fare: Most fares $10-50, some $500+ (outliers)
+- Solution: Log transform or cap at 95th percentile 
+
+
+
+OUTLIER IMPACT ON MEAN: [along col]
+- Outlier is the shift of the representation 
+- Mean is center/representation of data 
+- Mean gets biased towards outliers -> problem created by outlier 
+- Example: [1,2,3,4,5] mean=3, but [1,2,3,4,50] mean=12 (biased by outlier)
+
+SOLUTIONS TO MEAN BIAS:
+- Use median (resistant to outliers)
+- Remove/cap outliers before calculating mean
+- Use robust statistics
+
+TYPES OF OUTLIERS BY DIRECTION:
+
+OUTLIER [ALONG COLUMN] (within single feature):
+- Extreme values in one column only
+- Example: Age column has value 200 years
+- Solution: Replace with general value (like replace null values)
+- Methods: Use median, mean, or domain-specific values
+
+OUTLIER [ACROSS COLUMNS] (between features):
+- Point is far from overall data pattern
+- Line/regression moves toward isolated point (unfair influence)
+- Example: High income but low spending (unusual pattern)
+- Solution: Remove or transform entire observation
+
+HOW TO GET RID OF ALONG AND ACROSS:
+ALONG -> Replace by general value [like replace null values];median val
+ACROSS -> Remove entire row or use robust methods ; regularization [Ridge/Lasso]                
+
+
+"Regularization" -> means adding penalty to model complexity to prevent overfitting
+
+TYPES OF REGULARIZATION:
+1. Ridge (L2): Adds squared coefficient penalty → shrinks coefficients
+2. Lasso (L1): Adds absolute coefficient penalty → can zero out coefficients
+3. Elastic Net: Combines both Ridge and Lasso
+
+WHY USE FOR OUTLIERS:
+- Reduces influence of extreme points
+- Makes model more stable
+- Prevents overfitting to unusual patterns
+
+OUTLIER SUMMARY:
+- ALONG: Single column extreme → fix value
+- ACROSS: Multi-feature pattern → fix observation
+- Both can bias mean and affect model performance
+- Choose method based on data context and domain knowledge

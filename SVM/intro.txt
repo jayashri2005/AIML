@@ -96,3 +96,4 @@ hyperparameterr => "SVClassifier(kernal='linear',c=1.0)"
 
  "for eaxmple div data into 4 parts and train on 3 parts and test on 1 part and repeat this process 4 times" cv=4 
  "special kind" -> statified scheme -> under statified kfold
+ 
