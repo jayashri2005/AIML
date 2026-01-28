@@ -19,6 +19,7 @@ plt.clf()
 
 y[-1],y[-2]=99.28,98.28
 
+
 plt.scatter(x,y)
 plt.savefig('outliers2.png')
 plt.clf()
@@ -33,4 +34,20 @@ model.predict(X)
 plt.plot(x,model.predict(X),color='red')
 plt.scatter(x,y)
 plt.savefig('outliers3.png')
-plt.clf()
+
+#hubber regressor
+from sklearn.linear_model import HuberRegressor
+huber=HuberRegressor(epsilon=1.35)  # epsilon controls the transition point (δ)
+huber.fit(X,y)
+plt.plot(x,huber.predict(X),color='black', label='Huber')
+plt.scatter(x,y)
+plt.savefig('outliers4.png')
+
+#lasso
+from sklearn.linear_model import Lasso
+lasso=Lasso(alpha=10.0)  # alpha 
+lasso.fit(X,y)
+plt.plot(x,lasso.predict(X),color='blue', label='Lasso')
+plt.scatter(x,y)
+plt.legend()
+plt.savefig('outliers5.png')

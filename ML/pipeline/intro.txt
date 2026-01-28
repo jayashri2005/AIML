@@ -181,3 +181,148 @@ OUTLIER SUMMARY:
 - ACROSS: Multi-feature pattern → fix observation
 - Both can bias mean and affect model performance
 - Choose method based on data context and domain knowledge
+
+"HOW TO GET RID OF NEGATIVE OUTLIERS":
+
+NEGATIVE OUTLIERS: Values far below normal range
+Examples: Temperature -50°C in summer, Income -$1000, Age -5 years
+
+METHODS TO HANDLE NEGATIVE OUTLIERS:
+1. Remove them (if data errors)
+2. Replace with minimum acceptable value
+3. Use mean absolute value (if sign doesn't matter)
+4. Apply transformation (log of absolute value)
+5. Use robust methods (Huber, quantile regression)
+
+EXAMPLE:
+Data: [10, 15, 20, 25, -100, 30]
+Negative outlier: -100
+Solution: Replace with min acceptable value (e.g., 0) or remove
+
+KEY POINT: Negative outliers are handled same as positive outliers
+- Check if they're valid or errors
+- Use same detection methods (IQR, Z-score)
+- Apply same fixes (remove, replace, transform)
+
+"HUBER LOSS":
+
+Huber Loss is a robust loss function that combines MSE and MAE:
+- For small errors: Uses squared error (like MSE)
+- For large errors: Uses absolute error (like MAE)
+
+FORMULA:
+if |error| ≤ δ: loss = error²
+if |error| > δ: loss = δ × (|error| - 0.5 × δ)
+
+WHY HUBER LOSS IS GOOD FOR OUTLIERS:
+- Small errors: Normal quadratic penalty (like OLS)
+- Large errors: Linear penalty (less sensitive than quadratic)
+- δ (delta) controls the threshold between small/large errors
+
+EXAMPLE:
+- OLS: Error 10 → penalty 100, Error 50 → penalty 2500
+- Huber (δ=1): Error 10 → penalty 10, Error 50 → penalty 49
+- Result: Outliers have much less influence!
+
+BENEFITS:
+- Robust to outliers
+- Still differentiable (good for optimization)
+- Smooth transition between MSE and MAE
+
+implemented:
+- HuberRegressor in sklearn.linear_model
+- Used in outliers.py script (blue line)
+- Practical solution for outlier-resistant regression
+
+"HUBER REGRESSOR":
+
+Huber Regressor is a linear regression model that uses Huber Loss:
+- Combines OLS and robust regression
+- Automatically handles outliers
+- Good for datasets with some outliers
+
+HOW IT WORKS:
+1. Uses Huber Loss function instead of MSE
+2. δ (delta) parameter controls outlier sensitivity
+3. Iteratively finds best robust fit
+
+ADVANTAGES OVER OLS:
+- Less sensitive to outliers
+- Still fast and efficient
+- Provides robust coefficients
+- Works well with mixed data (some outliers, some normal)
+
+USAGE EXAMPLE:
+from sklearn.linear_model import HuberRegressor
+huber = HuberRegressor(epsilon=1.35)  # epsilon = δ
+huber.fit(X, y)
+
+WHEN TO USE HUBER REGRESSOR:
+- Data has some outliers (not too many)
+- Want linear relationship
+- Need robust coefficients
+- OLS is too sensitive to outliers
+
+COMPARISON:
+- OLS: Best for clean data, no outliers
+- Huber: Best for data with moderate outliers
+- RANSAC: Best for data with many outliers
+
+"hubber" mse+|e|
+"lasso"=mse+|w|
+
+KEY DIFFERENCE:
+- Huber: |e| = absolute error on predictions (handles outliers)
+- Lasso: |w| = absolute value of weights (feature selection)
+
+SIMPLE FORMULAS:
+- OLS: minimize MSE only
+- Huber: minimize MSE + |error| (robust to outliers)
+- Lasso: minimize MSE + |weights| (feature selection)
+- Ridge: minimize MSE + |weights|² (shrinkage)
+
+"lasso regression" with formula implementation means:
+
+LASSO (Least Absolute Shrinkage and Selection Operator):
+- Linear regression with L1 regularization
+- Performs both feature selection and regularization
+- Can shrink coefficients to exactly zero
+
+FORMULA:
+Minimize: Σ(yi - ŷi)² + λ × Σ|βj|
+
+Where:
+- Σ(yi - ŷi)² = Ordinary Least Squares loss
+- λ × Σ|βj| = L1 penalty term
+- λ (lambda) = regularization strength
+- βj = model coefficients
+
+HOW IT WORKS:
+1. Adds absolute value penalty to coefficients
+2. Large λ = more regularization, more coefficients become zero
+3. Small λ = less regularization, similar to OLS
+4. Automatically selects important features
+
+ADVANTAGES:
+- Feature selection (removes useless features)
+- Prevents overfitting
+- Handles multicollinearity
+- Creates sparse models
+
+USAGE EXAMPLE:
+from sklearn.linear_model import Lasso
+lasso = Lasso(alpha=0.1)  # alpha = λ
+lasso.fit(X, y)
+print("Coefficients:", lasso.coef_)
+print("Features used:", sum(lasso.coef_ != 0))
+
+WHEN TO USE LASSO:
+- Many features, suspect some are useless
+- Want automatic feature selection
+- Dealing with multicollinearity
+- Need interpretable model
+
+COMPARISON TO RIDGE:
+- Lasso: L1 penalty, can zero out coefficients
+- Ridge: L2 penalty, shrinks but never zeros coefficients
+- Elastic Net: Combines both L1 and L2
