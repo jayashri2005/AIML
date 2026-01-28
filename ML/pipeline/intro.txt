@@ -326,3 +326,6 @@ COMPARISON TO RIDGE:
 - Lasso: L1 penalty, can zero out coefficients
 - Ridge: L2 penalty, shrinks but never zeros coefficients
 - Elastic Net: Combines both L1 and L2
+
+
+100 loss -> regularization -> 1000 loss
