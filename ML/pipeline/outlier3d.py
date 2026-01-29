@@ -29,7 +29,7 @@ print(df.head(10))   # show first 10 rows
 X_train, X_test, y_train, y_test = train_test_split(
     X, y_with_outlier, test_size=0.2, random_state=42
 )
- 
+print("\nX size",X.shape)
 print("\nTrain shape:", X_train.shape, "Test shape:", X_test.shape)
  
 # ---------------- Linear Regression ----------------
@@ -80,4 +80,29 @@ print("Train MSE:", round(mse_lasso_train, 3), "Test MSE:", round(mse_lasso_test
 print("\nHuber Regression (with outlier)")
 print("Coefficients:", huber.coef_)
 print("Train MSE:", round(mse_huber_train, 3), "Test MSE:", round(mse_huber_test, 3))
+
+# Train vs Test Differences
+print("\n===== TRAIN vs TEST DIFFERENCES =====")
+print("Linear Regression (with outlier):")
+print(f"  Difference: {abs(mse_outlier_train - mse_outlier_test):.4f}")
+
+print("\nLinear Regression (without outlier):")
+print(f"  Difference: {abs(mse_clean_train - mse_clean_test):.4f}")
+
+print("\nLasso Regression (with outlier):")
+print(f"  Difference: {abs(mse_lasso_train - mse_lasso_test):.4f}")
+
+print("\nHuber Regression (with outlier):")
+print(f"  Difference: {abs(mse_huber_train - mse_huber_test):.4f}")
+
+# Best model based on test MSE
+test_mses = {
+    "Linear (with outlier)": mse_outlier_test,
+    "Linear (without outlier)": mse_clean_test,
+    "Lasso (with outlier)": mse_lasso_test,
+    "Huber (with outlier)": mse_huber_test
+}
+
+best_model = min(test_mses, key=test_mses.get)
+print(f"\nBest model (lowest test MSE): {best_model} with MSE: {test_mses[best_model]:.4f}")
  

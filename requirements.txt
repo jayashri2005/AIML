@@ -43,3 +43,5 @@ scikit-learn
 matplotlib
 numpy
 mglearn
+gym 
+gymnasium 
