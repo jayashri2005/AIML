@@ -48,13 +48,14 @@ for episode in range(num_episodes):
         next_state,reward,done,_,info=env.step(action) #move  agent into env 
 
         old_value=Q[state,action]
-        #bellman eq V(s) = max_a [R(s,a) + γ * V(s')]
-        Q[state,action]=Q[state,action]+alpha*(reward+gamma*np.max(Q[next_state])-Q[state,action]) 
+        #bellman eq V(s) = max_a [R(s,a) + γ * V(s')] 
+        # instead of prob we have expectation [not fixed] -> so every nxt step target expect moving
+        Q[state,action]=Q[state,action]+alpha*(reward+gamma*np.max(Q[next_state])-Q[state,action]) #reward+...) -> target
         #like y-yp;alpha-learning rate;gamma-discount factor;Q[next_state] -> reward in Q val
         #use err to take feedback
         max_delta=max(max_delta,abs(old_value-Q[state,action]))
         state=next_state
-        if done:
+        if done: #if reached -> true stop
             break
     epsilon=max(epsilon_min, epsilon*0.9)
     if max_delta<threshold and epsilon<0.05:
@@ -70,4 +71,5 @@ Q(s,a)=E(r0+γ*G1)
 expected rewards/val = target
 
 """
+
 

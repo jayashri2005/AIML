@@ -111,3 +111,8 @@ applications of Reinforcement learning:
 - Compare results with published papers
 
 
+"DeepQLearning" 
+We use Deep Q‑Learning when the state space is too large, too complex, or continuous for a Q‑table;
+and we need a neural network to approximate the Q‑function.
+-example: CartPole
+input nd target - use same nn but target will not be trained instead of it just copy it 
