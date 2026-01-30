@@ -71,5 +71,3 @@ Q(s,a)=E(r0+γ*G1)
 expected rewards/val = target
 
 """
-
-

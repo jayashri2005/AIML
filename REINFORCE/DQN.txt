@@ -1,0 +1,14 @@
+
+
+"""
+use policynet -> expect[action] we get action on the bases of prob ->argmax to find best one
+prep dict -> to store mry 
+train -> take place -> policy network
+q val comp against arget_q_val [obtained from detached -> block dl/dw] as err
+prev reward = 0 ; pres rew considered
+not connected - training generalized 
+mry->to get sample;sample -> to train [to make disconnected] -> why disconnect -= to generalize
+policy -> twoo types [on[pure exploitation(dont take rise)],off[exploration(take risk)]]
+on policy=train using current state 
+off policy = train policy not eq to behaviour policy 
+"""

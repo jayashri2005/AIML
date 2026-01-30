@@ -116,3 +116,117 @@ We use Deep Q‑Learning when the state space is too large, too complex, or cont
 and we need a neural network to approximate the Q‑function.
 -example: CartPole
 input nd target - use same nn but target will not be trained instead of it just copy it 
+
+"""
+cartpole -> A pole is attached to a cart that moves along a track. The goal is to balance the pole upright by pushing the cart left or right.
+          ->+1 for every timestep the pole stays balanced
+          ->-1 if the pole falls
+action space -> 0 (left push) 1(right push)
+observation space -> [cart_position(x), cart_velocity(x_dot), pole_angle(theta), pole_angular_velocity(theta_dot)]
+
+Parameter           | Termination | Limit
+--------------------|-------------|------------------
+Cart Position (x)   | Yes         | ±2.4
+Pole Angle (θ)      | Yes         | ±12° (~0.2095 rad)
+Cart Velocity (ẋ)  | No          | Infinite allowed
+Pole Angular Velocity (θ̇) | No    | Infinite allowed
+Time Steps          | Yes (Truncation) | 500 (v1)
+
+"""
+
+"UNSQUEEZE" -> expand and  add dimension
+"SQUEEZE" -> remove tensor size
+
+Qvalu = state + action info
+
+prob - dev around area; any num in this reg we cal area,prob=0.5 it cover 50 per
+math - data lying in middle,mean in the middle 
+
+"likelehood" -> max = mean[may/may not be] 
+max likelihood = peak of distribution
+Peak of distribution: The most probable parameter value given the data
+Not always the mean: For skewed distributions, the maximum likelihood estimate differs from the mean
+
+TD(0) = Q(s,a)<-Q(s,a)+alpha[r+gamma*Qmax(s',a')-Q(s,a)] = qlearning 
+TD(0) = Q(s,a)<-Q(s,a)+alpha[r+gamma*Q(s',a')-Q(s,a)] = sarsa 
+
+1 step at a tie - update polcy [T[0]] [chess]
+""Monte Carlo"" - update policy [T[1]] 
+
+take all step until game finish then update or see reward = T[1] = "Mounte Carlo"
+
+"policy"=>exp reward ; weighted as multi prob ; expectation or reward that shape our policy ; 
+        =>probability take in distribution formats
+"weightage" in linear reg point of view = coefficients/parameters that determine feature importance 
+
+"policy gradien asent" = always +ve theta+policy theta->parameter 
+
+"advantage function" = how much better is action a in state s vs average action in state s
+                     => reduce noise in Q 
+formula 
+
+   => A(s,a)=Q(s,a)-V(s) [Q-V]=>prob reduced 
+
+    where:
+    Q(s,a) = expected reward for taking action a in state s
+    V(s) = expected reward for being in state s (average over all actions)
+
+E_π[A^π(s,a)] = 0    ← Zero mean (baseline effect)
+A^π(s, π(s)) ≈ 0     ← Policy actions have ~0 advantage
+max_a A^π(s,a) ≥ 0   ← Best action always non-negative
+
+   
+
+-> Policy Gradient Update: ∇θJ = E[ ∇θlogπ(a|s) * G ]  [PI - prob of policy/action]
+
+->  ∇θlogπ(a|s) * G = [weightage] × [probability] × [reward]
+
+->  π(a|s) = probability of taking action a in state s
+     ↓ Variance HIGH (G fluctuates a lot)
+     → High variance because G depends on entire episode trajectory
+     → One episode might get G=100, another G=5 → unstable updates
+
+∇θJ = E[ ∇θlogπ(a|s) * A(s,a) ]  ← Variance LOW!
+
+Aᵗ = Gᵗ - V(sₜ)  [+ve increase prob -ve reduce chance of getting action]
+Aᵍᵃᵉ = δᵗ + γλδᵗ⁺¹
+δₜ = rₜ₊₁ + γV(sₜ₊₁) - V(sₜ)
+
+
+G₀ = r₁ + γr₂ + γ²r₃ + ... = Σᵢ γⁱ⁻¹ rᵢ
+
+where:
+G₀ = return from time step 0
+r₁, r₂, r₃ = rewards at time steps 1, 2, 3
+γ = discount factor (0 < γ < 1)
+Σ = summation over all future rewards
+
+
+
+where:
+Aᵗ = advantage at time t
+Gᵗ = return (cumulative reward) from time t to end of episode [full reward/td[1]]
+V(sₜ) = value function at state sₜ
+δₜ = temporal difference error at time t
+rₜ₊₁ = reward at time t+1
+γ = discount factor (0.99)
+λ = GAE parameter (0.95)
+
+expected val =rew*prob+rew*prob+..
+reward taken as V [Vmax,Vavg] or Q
+
+
+graph summa point pana jurkey movement athuvey avg use pana smooth 
+
+
+sometime adv fun cal as 
+    1.a=q-V
+    2.a=g-V
+    3.a=v 
+
+
+"Policy Gradient Theorem" => used when action are continuous ; env used for policy gradient 
+
+"policy gradient" => probability distribution separately calculated for each action
+
+"ActorCritic" -> combines policy gradient (actor) + value function (critic) ; actor selects actions, critic evaluates them 
