@@ -41,7 +41,7 @@ critic_optimizer=optim.Adam(model.critic.parameters(),lr=0.005)
 
 env.reset()
 
-episodes=100
+episodes=1000
 gamma=0.99
 
 for episode in range(episodes):
@@ -81,3 +81,6 @@ for episode in range(episodes):
 
     actor_optimizer.step()
     critic_optimizer.step()
+
+    if episode%100==0:
+        print(f"Episode {episode}, Total Reward: {sum(rewards)}")

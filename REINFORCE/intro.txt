@@ -230,3 +230,10 @@ sometime adv fun cal as
 "policy gradient" => probability distribution separately calculated for each action
 
 "ActorCritic" -> combines policy gradient (actor) + value function (critic) ; actor selects actions, critic evaluates them 
+
+what is actor and what is critic
+
+Actor -> neural network that outputs action probabilities ; decides which action to take [take same policy gradient]
+Critic -> neural network that estimates state value V(s) ; evaluates how good the action/state is [alternative ]
+
+"PPO" => Proximal Policy Optimization ; uses clipped objective function to prevent large policy updates ; more stable than vanilla policy gradient
